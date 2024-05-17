@@ -1,7 +1,9 @@
-from core.initialize import color
+from core.initialize.color import color
 import random
 
-banner_1 = color.yellow("""
+banner_1 = color.green("""
+____________________________________________________________
+                       
          ||   |||          |||||                          
          ||   ||          ||||||                          
          ||  ||           ||   ||                         
@@ -16,11 +18,12 @@ banner_1 = color.yellow("""
 |||||    ||    ||  ||||    |||||    ||||   ||| ||  ||  || 
 ||                                                        
 ||                                                        
+-------------------------------------------------------------
                         """)
 
 banner_2 = color.yellow(r'''
                                 +---------------+
- How to find vulnerabilities?   |    vulmap     |
+ How to find vulnerabilities?   |    vulnscan   |
                                 +---------------+ 
     (╯▔＾▔)╯                        \ (•◡ •) / 
      \   |                            |   /
@@ -28,26 +31,17 @@ banner_2 = color.yellow(r'''
 
 
 def banner():
-    o_o = random.choice(range(10))
-    if o_o == 0:
-        return banner_1
-    elif o_o == 1:
-        return banner_1
-    elif o_o == 2:
-        return banner_1
-    elif o_o == 3:
-        return banner_1
-    elif o_o == 3:
-        return banner_1
-    elif o_o == 4:
-        return banner_1
-    elif o_o == 5:
-        return banner_1
-    elif o_o == 6:
-        return banner_1
-    elif o_o == 7:
-        return banner_1
-    elif o_o == 8:
-        return banner_1
-    elif o_o == 9:
-        return banner_2
+    ddddxbx = random.choice(range(10))
+    banners = {
+        0: banner_1,
+        1: banner_1,
+        2: banner_1,
+        3: banner_1,
+        4: banner_1,
+        5: banner_1,
+        6: banner_1,
+        7: banner_1,
+        8: banner_1,
+        9: banner_2
+    }
+    return banners.get(ddddxbx, banner_1)
