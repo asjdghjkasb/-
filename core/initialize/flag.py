@@ -1,4 +1,4 @@
-from module.color import color
+from  import color
 import random
 
 banner_1 = color.yellow("""                   __
