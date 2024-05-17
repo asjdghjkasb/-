@@ -27,7 +27,6 @@ def parse_port_range(port_input):
 
 if __name__ == "__main__": 
     while(1): 
-        banner.print_banner()
         print("Welcome to the IP Scanner!")    
         url = input("Please enter the IP address(default_port:80): ")
         payload = input("Please enter the payload: ")
