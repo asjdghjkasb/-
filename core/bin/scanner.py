@@ -49,31 +49,3 @@ if __name__ == "__main__":
             break
         result = sql_scanner.sql_injection_check(url,payload)
         print(result)  
-        # if choice == 3:
-        #     ip = input("Please enter the IP address: ")  
-        #     port_input = input("Please enter the port number or range (Default: 1-65535): ")  
-        #     num_threads = input("Please enter the number of threads (Default: 100): ")
-            
-            # 解析端口范围  
-        # try:  
-        #     start_port, end_port = parse_port_range(port_input)  
-        # except ValueError as e:  
-        #     print(e)  
-        #     sys.exit(1)  
-            
-            # 如果用户没有输入范围，使用默认值  
-            # if start_port == end_port:  
-            #     result = ipScan.ip_scan(ip, start_port, start_port, int(num_threads))  # 假设num_threads是一个合理的默认值  
-            # else:  
-            #     result = ipScan.ip_scan(ip, start_port, end_port, int(num_threads))  
-            
-            # open_port = []
-            
-            # for port, is_open in result.items():  
-            #     if is_open:  
-            #         open_port.append(port) 
-            
-            # if open_port: 
-            #     print(f"{ip}开放的端口有：{', '.join(map(str, open_port))}")  
-            # else:  
-            #     print(f"{ip}没有开放的端口。")
