@@ -1,0 +1,17 @@
+{
+  "request": {
+    "host": {},
+    "method": {},
+    "url": {},
+    "cookie": {},
+    "requestheader": {},
+    "requestbody": {}
+  },
+  "response": {
+    "statuscode": {},
+    "statusmessage": {},
+    "responsetime": {},
+    "responseheader": {},
+    "responsebody": {}
+  }
+}
