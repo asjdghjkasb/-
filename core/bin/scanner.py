@@ -1,11 +1,12 @@
+import json
 import sys,os
 
 # 获取项目根目录（假设你的脚本在 bin 目录下）  
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(base_dir) 
 
-from utils import fingerprint,banner
-from vulnerabilities.sql_injection import sql_scanner
+from module.Poc import char_injection
+from module.utils import fingerprint
 def parse_port_range(port_input):  
     # 尝试将输入拆分为起始和结束端口  
     ports = port_input.split('-')  
@@ -25,9 +26,9 @@ def parse_port_range(port_input):
     except ValueError:  
         raise ValueError("Invalid port range or port number.") 
 
-if __name__ == "__main__": 
+def app(): 
     while(1): 
-        print("Welcome to the IP Scanner!")    
+        print("Welcome to the pKcScan!")    
         url = input("Please enter the IP address(default_port:80): ")
         payload = input("Please enter the payload: ")
 
@@ -41,11 +42,13 @@ if __name__ == "__main__":
         else:  
             print("无效的地址和端口格式")
             break
+        
         fingerprints = fingerprint.print_port_info(ip,port)  
+        parsed_data = json.loads(fingerprints) 
         if fingerprints is not None:  
-            print(fingerprints)  
+            print(url + "\t服务:" + parsed_data[0]['product'] + ' ' + parsed_data[0]['version'] + '\t操作系统：' + parsed_data[0]['os'] + '\t指纹：' + parsed_data[0]['finger'])  
         else:  
             print("An error occurred while scanning.")
             break
-        result = sql_scanner.sql_injection_check(url,payload)
+        result = char_injection.sql_injection_check(url,payload)
         print(result)  

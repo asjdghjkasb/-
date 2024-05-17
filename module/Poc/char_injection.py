@@ -12,10 +12,10 @@ def sql_injection_check(url, payload):
         if response.status_code == 200:  
             # 检查响应中是否包含特定的字符串  
             if "your uid" in response.text or "your email is" in response.text:  
-                return "[+] Potential SQL Injection Detected with Payload: %s" % encoded_payload
+                return "[+] Potential SQL Injection Detected with Payload: %s" % payload
                 # print(f"[+] Response: {response.text}")  
             else:  
-                return "[-] No clear signs of SQL Injection with Payload: %s" % encoded_payload
+                return "[-] No clear signs of SQL Injection with Payload: %s" % payload
                 # 你也可以记录或打印完整的响应，以便后续分析  
         else:  
             return "[-] Non-200 response code: {response.status_code}"  
