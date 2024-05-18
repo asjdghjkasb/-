@@ -15,3 +15,6 @@ def get_value(key, def_value=None):
         return _global_dict[key]
     except KeyError:
         return def_value
+
+def get_all_items(): # 获取所有全局变量
+    return _global_dict.items()
