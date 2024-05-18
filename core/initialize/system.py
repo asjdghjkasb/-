@@ -9,15 +9,16 @@ def os_check():
     else:
         return "other"
 
-def path_check(current_os):
-    if current_os == "windows":
-        # 获取 Windows 中脚本运行的路径
-        script_path = os.path.abspath(os.path.dirname(__file__))
-        return script_path
-    elif current_os == "linux":
-        # 获取 Linux 中脚本运行的路径
-        script_path = os.path.abspath(os.path.dirname(__file__))
-        return script_path
-    else:
-        return "脚本路径获取失败"
+def path_add(base_path, *paths):  # 路径增加处理
+    if not base_path:
+        raise ValueError("基础路径不能为空")
 
+    if not all(isinstance(p, str) and p for p in paths):
+        raise ValueError("所有附加路径必须是非空字符串")
+
+    try:
+        for add_path in paths:
+            base_path = os.path.join(base_path, add_path)
+        return base_path
+    except Exception as e:
+        raise RuntimeError(f"连接路径时发生错误: {e}")
