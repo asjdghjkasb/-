@@ -1,9 +1,10 @@
 import requests  
 from urllib.parse import quote
   
-def sql_injection_check(url, payload):  
+def sql_injection_check(url):  
     param_name = url.split('?')[1].split('=')[0]
     # 构造带有payload的URL  
+    payload = ""
     base_url = url.split('?')[0]
     encoded_payload = quote(payload, safe='')
     test_url = f"http://{base_url}?{param_name}={encoded_payload}&submit=查询"  

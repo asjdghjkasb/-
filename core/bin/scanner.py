@@ -5,8 +5,8 @@ import sys,os
 base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(base_dir) 
 
-from module.Poc import char_injection
-from module.utils import fingerprint
+from module.Poc import loadPoc
+from module.Poc import fingerprint
 def parse_port_range(port_input):  
     # 尝试将输入拆分为起始和结束端口  
     ports = port_input.split('-')  
@@ -30,7 +30,6 @@ def app():
     while(1): 
         print("Welcome to the pKcScan!")    
         url = input("Please enter the IP address(default_port:80): ")
-        payload = input("Please enter the payload: ")
 
         parts = url.split(':')  
         if len(parts) == 1:  
@@ -50,5 +49,8 @@ def app():
         else:  
             print("An error occurred while scanning.")
             break
-        result = char_injection.sql_injection_check(url,payload)
-        print(result)  
+        result = loadPoc.load_poc(parsed_data[0]['finger'])
+        print(result)
+
+        # result = char_injection.sql_injection_check(url,payload)
+        # print(result)  

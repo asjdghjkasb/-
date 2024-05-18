@@ -1,5 +1,6 @@
 from core.initialize import globals
 from core.initialize import system
+import module.Poc.fingerprint as fingerprint
 import OreadPocJson
 
 def fingerToPoc(finger):
@@ -13,7 +14,7 @@ def fingerToPoc(finger):
         return "库中没有该指纹Poc"
     
 def test_fingerToPoc():
-    # 测试存在的指纹
+    #测试存在的指纹
     finger = "pikachu"
     try:
         result = fingerToPoc(finger)
