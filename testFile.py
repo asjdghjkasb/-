@@ -5,6 +5,7 @@ print(banner())
 from core.initialize import globals
 from core.initialize import system
 from core.bin.scanner import app
+from module.Poc import handlePoc
 
 # _global_dict 全局参数只允许在这个文件中改动
 def initialize():
@@ -16,5 +17,8 @@ def initialize():
 
 if __name__ == "__main__":
     initialize()
-    print(globals.get_all_items())
-    app()
+    # print(globals.get_all_items())
+    # print(handlePoc.fingerToPoc("pikachu","1.1.1"))
+    for i in handlePoc.loadAllPocjson(handlePoc.fingerToPoc("pikachu","1.1.1")):
+        print(i)
+    
