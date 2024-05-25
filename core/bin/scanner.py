@@ -31,26 +31,25 @@ def app():
         print("Welcome to the pKcScan!")    
         url = input("Please enter the IP address(default_port:80): ")
 
-        parts = url.split(':')  
-        if len(parts) == 1:  
-            ip = parts[0]  
-            port = 80  # 默认端口为80  
-        if len(parts) == 2:  
+        if ":" in url:
+            parts = url.split(':')
             ip = parts[0]  
             port = int(parts[1].split('/')[0]) 
-        else:  
-            print("无效的地址和端口格式")
-            break
-        
-        fingerprints = fingerprint.print_port_info(ip,port)  
-        parsed_data = json.loads(fingerprints) 
-        if fingerprints is not None:  
-            print(url + "\t服务:" + parsed_data[0]['product'] + ' ' + parsed_data[0]['version'] + '\t操作系统：' + parsed_data[0]['os'] + '\t指纹：' + parsed_data[0]['finger'])  
-        else:  
-            print("An error occurred while scanning.")
-            break
-        result = loadPoc.load_poc(parsed_data[0]['finger'])
-        print(result)
+        else: 
+            ip = url  
+            port = 80  
+
+        try:
+            fingerprints = fingerprint.print_port_info(ip,port)  
+            parsed_data = json.loads(fingerprints) 
+            if fingerprints is not None:
+                print(url + "\t服务:" + parsed_data[0]['product'] + ' ' + parsed_data[0]['version'] + '\t操作系统：' + parsed_data[0]['os'] + '\t指纹：' + parsed_data[0]['finger'])  
+            else:  
+                print("An error occurred while scanning.")
+                break
+            result = loadPoc.load_poc(ip, port, parsed_data[0]['finger'])
+        except Exception as e:  
+            print("An error occurred:", str(e))  
 
         # result = char_injection.sql_injection_check(url,payload)
         # print(result)  

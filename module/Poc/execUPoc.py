@@ -1,12 +1,15 @@
-from urllib.parse import quote  
-import requests  
+import re
+from urllib.parse import quote, urlparse, urlunparse  
+import requests
+
+from loadPoc import load_poc  
   
-def exe_poc(jsonData):  
+def exe_poc(ip, port, jsonData):  
     url = jsonData['request']['url']  
-    payload = jsonData['payload']  
+    payload = jsonData['request']['requestbody']  
     check_response = jsonData['response']['responsebody']  
     method = jsonData['request']['method']  
-  
+    # 针对于get请求
     if method == 'get':  
         # 检查URL中是否有查询参数
         if '?' in url:  
@@ -18,39 +21,60 @@ def exe_poc(jsonData):
                 rest = query_params.split('&',1)[1]  # 只拆分第一个'&'  
                 rest = f'&{rest}'
                 param_name = query_params.split('=')[0]  
-                base_url = url.split('?')[0]  
             else:  
                 # 如果只有一个参数，则直接使用该参数  
                 param_name= query_params.split('=')[0]  
                 rest = ''  
-                base_url = url.split('?')[0]  
   
             # 对payload进行URL编码  
             encoded_payload = quote(payload, safe='')  
   
             # 构建测试URL  
-            test_url = f"{base_url}?{param_name}={encoded_payload}{rest}"  
-  
+            parsed_url = urlparse(url) 
+            new_netloc = f"{ip}:{port}"
+            query = ""
+            new_url = urlunparse(parsed_url._replace(netloc=new_netloc,query=query)) 
+            test_url = f"{new_url}?{param_name}={encoded_payload}{rest}"  
             try:  
                 response = requests.get(test_url)  
                 if response.status_code == 200:  
                     if check_response in response.text:  
-                        type = jsonData['type']  
+                        type = jsonData['response']['statusmessage']
+                        return type
+                    else:
+                        type = "[-] 不存在漏洞"
                         return type
                 else:  
                     return "[-] Non-200 response code: {}".format(response.status_code)  
             except Exception as e:  
                 return "[-] Error fetching {}: {}".format(test_url, e)  
-        else:  
-            # URL中没有查询参数，无法执行替换  
+        else:   
             return "[-] No query parameters in the URL"  
-  
-    elif method == 'post':  
-        # 对于POST请求，您可以直接发送数据  
+    
+    elif method == 'post':    
+        url = jsonData['request']['url']  
+        parsed_url = urlparse(url)  
+        new_netloc = f"{ip}:{port}"  
+        query = ""
+        new_url = urlunparse(parsed_url._replace(netloc=new_netloc, query=query))  
+
+        headers = jsonData['request']['requestheader']  
+
+        cookies = {'PHPSESSID': jsonData['request']['cookie']}  
+
+        data = jsonData['request']['requestbody']  
+
         try:  
-            response = requests.post(url, data=payload)  
-            # 在这里添加对POST请求结果的检查  
-            # ...  
-            return "[+] POST response received"  # 或者其他适当的响应  
+            response = requests.post(new_url, headers=headers, cookies=cookies, data=data)  
+    
+            if response.status_code == 200:  
+                print(response.text)
+                if jsonData['response']['responsebody'] in response.text:  
+                    
+                    return jsonData['response']['statusmessage']  
+                else:  
+                    return "[-] 不存在数字型SQL注入"  
+            else:  
+                return f"[-] 非200响应码: {response.status_code}"  
         except Exception as e:  
-            return "[-] Error fetching {}: {}".format(url, e)  
+            return f"[-] 请求失败: {e}"  
