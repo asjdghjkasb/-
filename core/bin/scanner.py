@@ -1,12 +1,12 @@
 import json
-import sys,os
-
-# 获取项目根目录（假设你的脚本在 bin 目录下）  
-base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(base_dir) 
-
+import os
+import sys
 from module.Poc import loadPoc
 from module.Poc import fingerprint
+
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(base_dir)
+
 def parse_port_range(port_input):  
     # 尝试将输入拆分为起始和结束端口  
     ports = port_input.split('-')  
@@ -26,7 +26,7 @@ def parse_port_range(port_input):
     except ValueError:  
         raise ValueError("Invalid port range or port number.") 
 
-def app(): 
+def app():
     while(1): 
         print("Welcome to the pKcScan!")    
         url = input("Please enter the IP address(default_port:80): ")

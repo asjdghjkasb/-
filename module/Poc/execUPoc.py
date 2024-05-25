@@ -1,8 +1,5 @@
-import re
 from urllib.parse import quote, urlparse, urlunparse  
 import requests
-
-from loadPoc import load_poc  
   
 def exe_poc(ip, port, jsonData):  
     url = jsonData['request']['url']  
@@ -73,7 +70,7 @@ def exe_poc(ip, port, jsonData):
                     
                     return jsonData['response']['statusmessage']  
                 else:  
-                    return "[-] 不存在数字型SQL注入"  
+                    return "[-] 不存在漏洞"  
             else:  
                 return f"[-] 非200响应码: {response.status_code}"  
         except Exception as e:  
