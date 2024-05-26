@@ -12,9 +12,10 @@ def initialize():
     globals.set_value("SYS_OS", system.os_check()) # 当前操作系统
     globals.set_value("SYS_Path", os.path.abspath(os.path.dirname(__file__))) # 当前绝对路径
     sys.path.append(globals.get_value("SYS_Path")) # 添加项目根目录到环境变量
-    globals.set_value("Poc_Path", system.path_add(globals.get_value("SYS_Path"), "module", "Poc")) # Poc路径
+    globals.set_value("Poc_Path", system.path_add(globals.get_value("SYS_Path"), "module", "Poc", "pikachuPoc")) # Poc路径
 
 if __name__ == "__main__":
     initialize()
     print(globals.get_all_items())
-    app()
+    poc_path = globals.get_value("Poc_Path")
+    app(poc_path)
