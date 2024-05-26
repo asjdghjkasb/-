@@ -1,17 +1,7 @@
-/vulnerability_scanner  
-|-- /core # 脚本核心部分,基础功能实现
-| |-- /bin # 孙的东西
-| |-- /data # 数据存放
-| | |--/config # 配置
-| | |--/lib # 各类库
-| |-- / initialize # 初始化部分
-|-- /module # 模块部分,各种功能实现  
-| |--  
-|
-|  
-|-- requirements.txt # 项目依赖文件  
-|-- setup.py # 安装、打包等脚本
-|-- README.md # 项目说明文件  
-|-- .gitignore # Git 忽略文件  
-|-- LICENSE # 许可证文件
-|-- pKcScan.py # 主程序
+## Poc 相关规则
+
+1. Poc 放在 module/poc 目录, 目录位置 ./module/Poc/
+2. Poc 分类名称必须小写, 例如: ./module/Poc/pikachu
+3. Poc 版本号位于 Poc 名称下一级, 例如: ./module/Poc/pikachu/1.1.1
+4. Poc 全部为 Json 文件(暂时只支持 Json 文件)
+5. Poc 文件模板位于 ./module/Poc/Template.json (Poc 自行添加)

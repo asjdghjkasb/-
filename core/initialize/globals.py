@@ -11,6 +11,9 @@ def set_value(key, value):
 
 
 def get_value(key, def_value=None):
+    '''
+    获取全局变量
+    '''
     try:
         return _global_dict[key]
     except KeyError:

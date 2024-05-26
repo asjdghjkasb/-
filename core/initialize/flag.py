@@ -23,7 +23,7 @@ ____________________________________________________________
 
 banner_2 = color.yellow(r'''
                                 +---------------+
- How to find vulnerabilities?   |    vulnscan   |
+ How to find vulnerabilities?   |     pKcscan   |
                                 +---------------+ 
     (╯▔＾▔)╯                        \ (•◡ •) / 
      \   |                            |   /

@@ -1,5 +1,6 @@
 import os
 import platform
+from datetime import datetime
 
 def os_check():
     if platform.system().lower() == 'windows':
@@ -78,4 +79,8 @@ def getAllFilePath(path):
     return [os.path.join(root, file) for root, dirs, files in os.walk(path) for file in files]
 
 
-################   test方法   ################### 
+# 获取时间
+def get_time():
+    return datetime.now().strftime("%Y%m%d_%H%M%S")
+
+

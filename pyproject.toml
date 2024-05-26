@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "pkcscan"
+version = "0.1.0"
+description = ""
+authors = ["nini <got612399@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = "^2.32.2"
+colorama = "^0.4.6"
+python-nmap = "^0.7.1"
+datetime = "^5.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
