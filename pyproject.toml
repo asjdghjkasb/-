@@ -11,6 +11,7 @@ requests = "^2.32.2"
 colorama = "^0.4.6"
 python-nmap = "^0.7.1"
 datetime = "^5.5"
+pymongo = "^4.7.2"
 
 
 [build-system]

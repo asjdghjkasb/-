@@ -5,6 +5,8 @@ from requests.exceptions import HTTPError, RequestException
 from core.initialize import globals
 from core.initialize import system
 from core.bin import core
+from core.bin import handlePoc
+from core.bin import forMogoDB
 from core.initialize.printf import printfa
 from core.initialize.printf import printToConsole
 from core.initialize.printf import printToFile
@@ -28,4 +30,6 @@ def app():
     except Exception as err:
         printfa(f"An error occurred: {err}", "red")  # 其他非请求相关错误
     else:
+        # allFingerprint=handlePoc.loadAllPocjson(globals.get_value("BaseURL_Path"))
+        allFingerprint=handlePoc.loadAlljsonsForDB(forMogoDB.get_all_fingerprints())
         core.passiveFingerprintMatching(response)  # 继续处理响应数据

@@ -11,7 +11,7 @@ def getFingerprint(PocData):
     # 获取PocData对象中的数据
 
 # 被动指纹匹配
-def passiveFingerprintMatching(response,responseForFingerprint):
+def passiveFingerprintMatching(response):
     """
     被动指纹匹配
     :param PocData: PocData对象

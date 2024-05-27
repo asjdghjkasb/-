@@ -27,7 +27,7 @@ def findAllVersion(finger):
         raise ValueError("指纹不能为空")
     return system.findAllFilePathName(system.path_add(globals.get_value("Poc_Path"), finger))
 
-def loadAllPocjson(json_directory):
+def loadAlljsonForFile(json_directory):
     """
     此函数从JSON文件夹中加载所有JSON为对象
     """
@@ -38,3 +38,5 @@ def loadAllPocjson(json_directory):
     # 返回对象 读取所有 JSON 文件并创建对象
     return [PocData.from_json_file(json_file) for json_file in system.getAllFilePath(json_directory)]
   
+def loadAlljsonsForDB(jsons):
+    return [PocData(json) for json in jsons]
