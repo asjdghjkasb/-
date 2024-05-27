@@ -1,17 +1,28 @@
-import re
 from urllib.parse import urlparse, parse_qs
 
 class OInitializeURL:
     def __init__(self, Url):
-        self._url = Url
-        parsed_url = urlparse(self._url)
+        try:
+            self._url = Url
+            parsed_url = urlparse(self._url)
+            
+            self._scheme = parsed_url.scheme  # 协议部分
+            self._netloc = parsed_url.netloc  # 域名部分
+            self._path = parsed_url.path      # 地址部分
+            self._query = parsed_url.query    # 查询部分
 
-        self._scheme = parsed_url.scheme  # 协议部分
-        self._netloc = parsed_url.netloc  # 域名部分
-        self._path = parsed_url.path      # 地址部分
-        self._query = parsed_url.query    # 查询部分
+            self.query_dict = parse_qs(self._query)
+        except Exception as e:
+            print(f"Error parsing URL: {e}")
+            raise ValueError("Invalid URL") from e
 
-        self.query_dict = parse_qs(self._query)
+    @property
+    def url(self):
+        return self._url
+
+    @url.setter
+    def url(self, value):
+        self.url = value
 
     @property
     def scheme(self):

@@ -61,7 +61,7 @@ def printToFile(msg, file_path=None):
             return
 
     try:
-        with open(file_path, 'a') as f:
+        with open(file_path, 'a', encoding='utf-8') as f:
             f.write(msg + '\n')
     except FileNotFoundError:
         # 如果文件不存在，创建文件并写入消息
@@ -75,7 +75,7 @@ def printToFile(msg, file_path=None):
                 return
         # 创建文件后再次尝试写入消息
         try:
-            with open(file_path, 'a') as f:
+            with open(file_path, 'a', encoding='utf-8') as f:
                 f.write(msg + '\n')
         except Exception as e:
             # 如果写入消息失败，打印错误信息

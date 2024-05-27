@@ -15,6 +15,7 @@ class PocData:
         # 初始化PocData类
         self.name = json_data.get('name', '')
         self.comment = json_data.get('comment', '')
+        self.version = json_data.get('version', '')
         self.main_request = {key: RequestResponse(value) for key, value in json_data.get('mainRequest', {}).items()}
 
     @classmethod
@@ -37,21 +38,16 @@ class PocData:
 
     def __repr__(self):
         # 返回PocData对象的字符串表示
-        return f"PocData(name={self.name}, comment={self.comment}, main_request={self.main_request})"
+        return f"PocData(name={self.name}, comment={self.comment}, version={self.version}, main_request={self.main_request})"
 
     def display(self):
         # 打印PocData对象的内容
         print(f"Name: {self.name}")
         print(f"Comment: {self.comment}")
+        print(f"Version: {self.version}")
         print("Main Requests:")
         for key, req_res in self.main_request.items():
             print(f"  Request {key}:")
             print(f"    Request: {req_res.request}")
             print(f"    Response: {req_res.response}")
 
-if __name__ == "__main__":
-    # 加载JSON文件中的数据
-    poc_data = PocData.from_json_file('poc_data.json')
-    if poc_data:
-        # 显示加载的数据
-        poc_data.display()

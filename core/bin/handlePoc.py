@@ -1,6 +1,6 @@
 from core.initialize import globals
 from core.initialize import system
-from core.bin.Oreadjson import RequestResponseData
+from core.bin.Oreadjson import PocData
 
 def fingerToPoc(finger,versions=None):
     if not finger:
@@ -36,5 +36,5 @@ def loadAllPocjson(json_directory):
     if not system.path_check(json_directory):
         raise RuntimeError("JSON文件夹不存在")
     # 返回对象 读取所有 JSON 文件并创建对象
-    return [RequestResponseData.from_json_file(json_file) for json_file in system.getAllFilePath(json_directory)]
+    return [PocData.from_json_file(json_file) for json_file in system.getAllFilePath(json_directory)]
   
