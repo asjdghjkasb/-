@@ -5,6 +5,7 @@
 ```python
 pip install poetry
 poetry install
+poetry shell
 ```
 
 然后就可以使用该项目了
@@ -21,6 +22,9 @@ poetry install
 2. fingerprint 全部为 Json 文件(暂时只支持 Json 文件)
 3. fingerprint 文件模板位于 ./module/fingerprint/Template.json (fingerprint 自行添加)
 4. 请求包与响应包请按照http协议要求书写
+5. 模板中可以有多次请求和响应
+6. 如果只有一次请求就会分为两种情况, 一是请求方式为空的,就视为被动识别,不会发起请求检测;二是有请求方式的,就视为主动识别,会发起请求进行检测
+7. 指纹识别优先执行被动识别, 如果识别成功,将不会执行主动识别
 
 ## Poc 相关规则
 

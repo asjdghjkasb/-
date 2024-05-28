@@ -3,14 +3,14 @@ import sys
 
 from core.initialize.flag import banner
 print(banner())
+
 from core.initialize import globals
 from core.initialize import system
 from core.initialize import mongoConnect
 from core.bin import writeJsonToDB
-from core.initialize.printf import printfa
-from core.initialize.printf import printToConsole
-from core.initialize.printf import printToFile
-from pkcscan.app import app
+from core.initialize.printf import printfa, printToConsole, printToFile
+from pkcscan import app
+
 
 # _global_dict 全局参数只允许在这个文件中改动
 def initialize():# 初始化
@@ -34,6 +34,11 @@ def initialize():# 初始化
 
 if __name__ == "__main__":
     initialize()
-    app()
+    fingerprint=app.fingerprintRecognition()# 指纹识别
+    if fingerprint != "0":
+        globals.set_value("Fingerprint",fingerprint)# 将指纹识别结果添加至全局参数,app.fingerprintRecognition()就是在进行指纹识别
+        app.execPoc()  
+    else:
+        printfa("指纹识别失败")
     globals.GlobalObjectStore.get_object("Omongo").client.close()
     printfa("数据库已断开","message")

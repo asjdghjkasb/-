@@ -1,20 +1,26 @@
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import urlparse, parse_qs, urlunparse
 
 class OInitializeURL:
     def __init__(self, Url):
         try:
             self._url = Url
-            parsed_url = urlparse(self._url)
-            
-            self._scheme = parsed_url.scheme  # 协议部分
-            self._netloc = parsed_url.netloc  # 域名部分
-            self._path = parsed_url.path      # 地址部分
-            self._query = parsed_url.query    # 查询部分
-
-            self.query_dict = parse_qs(self._query)
+            self._parse_url()
         except Exception as e:
             print(f"Error parsing URL: {e}")
             raise ValueError("Invalid URL") from e
+
+    def _parse_url(self):
+        parsed_url = urlparse(self._url)
+        
+        self._scheme = parsed_url.scheme  # 协议部分
+        self._netloc = parsed_url.netloc  # 域名部分
+        self._path = parsed_url.path      # 路径部分
+        self._query = parsed_url.query    # 查询部分
+
+        self.query_dict = parse_qs(self._query)
+
+    def _update_url(self):
+        self._url = urlunparse((self._scheme, self._netloc, self._path, '', self._query, ''))
 
     @property
     def url(self):
@@ -22,7 +28,8 @@ class OInitializeURL:
 
     @url.setter
     def url(self, value):
-        self.url = value
+        self._url = value
+        self._parse_url()
 
     @property
     def scheme(self):
@@ -31,6 +38,7 @@ class OInitializeURL:
     @scheme.setter
     def scheme(self, value):
         self._scheme = value
+        self._update_url()
 
     @property
     def netloc(self):
@@ -39,6 +47,7 @@ class OInitializeURL:
     @netloc.setter
     def netloc(self, value):
         self._netloc = value
+        self._update_url()
 
     @property
     def path(self):
@@ -47,6 +56,7 @@ class OInitializeURL:
     @path.setter
     def path(self, value):
         self._path = value
+        self._update_url()
 
     @property
     def query(self):
@@ -56,6 +66,7 @@ class OInitializeURL:
     def query(self, value):
         self._query = value
         self.query_dict = parse_qs(self._query)
+        self._update_url()
 
     def print_all(self):
         print(f"Scheme: {self.scheme}")
@@ -69,7 +80,7 @@ class OInitializeURL:
                 print(f"  {param}: {', '.join(values)}")
 
 if __name__ == "__main__":
-    url = "https://www.example.com:8080/?param1=value1&param2=value2&param2=value3"
+    url = "/ads/asdfasdf/?param1=value1&param2=value2&param2=value3"
     oinitialize_url = OInitializeURL(url)
     oinitialize_url.print_all()
 
